@@ -13,6 +13,10 @@
 		AA58CDBD1B51BF6A00939A2B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA58CDBC1B51BF6A00939A2B /* Images.xcassets */; };
 		AA58CDC01B51BF6A00939A2B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA58CDBE1B51BF6A00939A2B /* LaunchScreen.xib */; };
 		AA58CDCC1B51BF6A00939A2B /* ReaXnTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58CDCB1B51BF6A00939A2B /* ReaXnTests.swift */; };
+		AA58CDDA1B51C35B00939A2B /* ARAudioRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = AA58CDD81B51C35B00939A2B /* ARAudioRecognizer.m */; };
+		AA58CDDD1B51C4D300939A2B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA58CDDC1B51C4D300939A2B /* CoreMotion.framework */; };
+		AA58CDE31B51C76100939A2B /* TSCoreMotionListener.m in Sources */ = {isa = PBXBuildFile; fileRef = AA58CDE01B51C76100939A2B /* TSCoreMotionListener.m */; };
+		AA58CDE41B51C76100939A2B /* TSTapDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = AA58CDE21B51C76100939A2B /* TSTapDetector.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -36,6 +40,15 @@
 		AA58CDC51B51BF6A00939A2B /* ReaXnTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReaXnTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA58CDCA1B51BF6A00939A2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA58CDCB1B51BF6A00939A2B /* ReaXnTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaXnTests.swift; sourceTree = "<group>"; };
+		AA58CDD71B51C35B00939A2B /* ARAudioRecognizer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARAudioRecognizer.h; path = ReaXn/ARAudioRecognizer/ARAudioRecognizer.h; sourceTree = "<group>"; };
+		AA58CDD81B51C35B00939A2B /* ARAudioRecognizer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = ARAudioRecognizer.m; path = ReaXn/ARAudioRecognizer/ARAudioRecognizer.m; sourceTree = "<group>"; };
+		AA58CDD91B51C35B00939A2B /* ARAudioRecognizerDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ARAudioRecognizerDelegate.h; path = ReaXn/ARAudioRecognizer/ARAudioRecognizerDelegate.h; sourceTree = "<group>"; };
+		AA58CDDB1B51C3A900939A2B /* ReaXn-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = "ReaXn-Bridging-Header.h"; path = "ReaXn/ReaXn-Bridging-Header.h"; sourceTree = "<group>"; };
+		AA58CDDC1B51C4D300939A2B /* CoreMotion.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMotion.framework; path = System/Library/Frameworks/CoreMotion.framework; sourceTree = SDKROOT; };
+		AA58CDDF1B51C76100939A2B /* TSCoreMotionListener.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSCoreMotionListener.h; path = ReaXn/TapShare/TSCoreMotionListener.h; sourceTree = "<group>"; };
+		AA58CDE01B51C76100939A2B /* TSCoreMotionListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSCoreMotionListener.m; path = ReaXn/TapShare/TSCoreMotionListener.m; sourceTree = "<group>"; };
+		AA58CDE11B51C76100939A2B /* TSTapDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSTapDetector.h; path = ReaXn/TapShare/TSTapDetector.h; sourceTree = "<group>"; };
+		AA58CDE21B51C76100939A2B /* TSTapDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSTapDetector.m; path = ReaXn/TapShare/TSTapDetector.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -43,6 +56,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA58CDDD1B51C4D300939A2B /* CoreMotion.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -59,6 +73,8 @@
 		AA58CDA71B51BF6A00939A2B = {
 			isa = PBXGroup;
 			children = (
+				AA58CDDE1B51C4E300939A2B /* Frameworks */,
+				AA58CDDB1B51C3A900939A2B /* ReaXn-Bridging-Header.h */,
 				AA58CDB21B51BF6A00939A2B /* ReaXn */,
 				AA58CDC81B51BF6A00939A2B /* ReaXnTests */,
 				AA58CDB11B51BF6A00939A2B /* Products */,
@@ -110,6 +126,21 @@
 				AA58CDCA1B51BF6A00939A2B /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		AA58CDDE1B51C4E300939A2B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				AA58CDDF1B51C76100939A2B /* TSCoreMotionListener.h */,
+				AA58CDE01B51C76100939A2B /* TSCoreMotionListener.m */,
+				AA58CDE11B51C76100939A2B /* TSTapDetector.h */,
+				AA58CDE21B51C76100939A2B /* TSTapDetector.m */,
+				AA58CDD91B51C35B00939A2B /* ARAudioRecognizerDelegate.h */,
+				AA58CDD81B51C35B00939A2B /* ARAudioRecognizer.m */,
+				AA58CDD71B51C35B00939A2B /* ARAudioRecognizer.h */,
+				AA58CDDC1B51C4D300939A2B /* CoreMotion.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,8 +243,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AA58CDE41B51C76100939A2B /* TSTapDetector.m in Sources */,
 				AA58CDB81B51BF6A00939A2B /* ViewController.swift in Sources */,
+				AA58CDE31B51C76100939A2B /* TSCoreMotionListener.m in Sources */,
 				AA58CDB61B51BF6A00939A2B /* AppDelegate.swift in Sources */,
+				AA58CDDA1B51C35B00939A2B /* ARAudioRecognizer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -341,8 +375,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ReaXn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ReaXn/ReaXn-Bridging-Header.h";
 			};
 			name = Debug;
 		};
@@ -351,8 +387,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ReaXn/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "ReaXn/ReaXn-Bridging-Header.h";
 			};
 			name = Release;
 		};
@@ -409,6 +447,7 @@
 				AA58CDD11B51BF6A00939A2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		AA58CDD21B51BF6A00939A2B /* Build configuration list for PBXNativeTarget "ReaXnTests" */ = {
 			isa = XCConfigurationList;
@@ -417,6 +456,7 @@
 				AA58CDD41B51BF6A00939A2B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

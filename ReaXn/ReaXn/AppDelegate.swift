@@ -9,13 +9,21 @@
 import UIKit
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
 
     var window: UIWindow?
-
+    var tapDetector: TSTapDetector!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        // initialize tap detector
+        self.tapDetector = TSTapDetector.init()
+        self.tapDetector.listener.collectMotionInformationWithInterval(10)
+        self.tapDetector.delegate = self
+        
+        UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler(expirationCallback)
+        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))
+
         return true
     }
 
@@ -40,7 +48,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
+    
+    // We should probably figure out what to do once the expiration times out.
+    // Also, Swift closures confuse me so I defined a function handle.
+    func expirationCallback() {
+        
+    }
+    
+    // Tap detection callback
+    func detectorDidDetectTap(detector: TSTapDetector!) {
+        createNotification()
+    }
+    
+    func createNotification() {
+        // create a corresponding local notification
+        var notification = UILocalNotification()
+        notification.alertBody = "Notification text goes here" // text that will be displayed in the notification
+        notification.alertAction = "Action" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+        notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+        notification.userInfo = ["UUID": NSUUID().UUIDString, ] // assign a unique identifier to the notification so that we can retrieve it later
+        notification.category = "TODO_CATEGORY"
+        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+    }
 
 }
 
