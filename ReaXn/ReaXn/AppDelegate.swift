@@ -32,31 +32,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
     func registerForActionableNotifications() {
         // 1. Create the actions **************************************************
         // Open Action
-        let openAction = UIMutableUserNotificationAction()
-        openAction.identifier = "OPEN_ACTION"
-        openAction.title = "Open"
-        openAction.activationMode = UIUserNotificationActivationMode.Foreground
-        openAction.authenticationRequired = false
-        openAction.destructive = false
+        let helpAction = UIMutableUserNotificationAction()
+        helpAction.identifier = "HELP_ACTION"
+        helpAction.title = "Help"
+        helpAction.activationMode = UIUserNotificationActivationMode.Foreground
+        helpAction.authenticationRequired = false
+        helpAction.destructive = false
         
         // 2. Create the category ***********************************************
         
         // Category
-        let openCategory = UIMutableUserNotificationCategory()
-        openCategory.identifier = "OPEN_CATEGORY"
+        let actionCategory = UIMutableUserNotificationCategory()
+        actionCategory.identifier = "HELP_CATEGORY"
         
         // A. Set actions for the default context
-        openCategory.setActions([openAction],
+        actionCategory.setActions([helpAction],
             forContext: UIUserNotificationActionContext.Default)
         
         // B. Set actions for the minimal context
-        openCategory.setActions([openAction],
+        actionCategory.setActions([helpAction],
             forContext: UIUserNotificationActionContext.Minimal)
         
         // 3. Notification Registration *****************************************
         
         let types = UIUserNotificationType.Alert | UIUserNotificationType.Sound
-        let settings = UIUserNotificationSettings(forTypes: types, categories: NSSet(object: openCategory) as Set<NSObject>)
+        let settings = UIUserNotificationSettings(forTypes: types, categories: NSSet(object: actionCategory) as Set<NSObject>)
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
     }
 
@@ -100,16 +100,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         notification.alertAction = "Action" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
         notification.soundName = UILocalNotificationDefaultSoundName // play default sound
         notification.userInfo = ["UUID": NSUUID().UUIDString, ] // assign a unique identifier to the notification so that we can retrieve it later
-        notification.category = "OPEN_CATEGORY"
+        notification.category = "HELP_CATEGORY"
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
     }
     
-    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
-        // Handle notification action *****************************************
-        if notification.category == "OPEN_CATEGORY" {
-            println("open received")
-            NSNotificationCenter.defaultCenter().postNotificationName("receivedOpenNotification", object: self, userInfo: notification.userInfo)
-        }
+    func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+            
+            // Handle notification action *****************************************
+            if notification.category == "HELP_CATEGORY" {
+                
+                if let action = identifier {
+                    switch action{
+                        case "HELP_ACTION":
+//                            NSNotificationCenter.defaultCenter().postNotificationName("helpNotification", object: self, userInfo: notification.userInfo)
+                            NSNotificationCenter.defaultCenter().postNotificationName("receivedHelpNotification", object: self, userInfo: notification.userInfo)
+                        
+                            println("Help action triggered")
+//                            dialNumber("6083957313")
+
+                        default:
+                            return
+                    }
+                }
+            }
+            completionHandler()
+    }
+    
+    func dialNumber(number : String) {
+        let phoneNumber = "telprompt://\(number)"
+        println("calling \(phoneNumber)")
+        UIApplication.sharedApplication().openURL(NSURL(string: phoneNumber)!)
     }
 
 }

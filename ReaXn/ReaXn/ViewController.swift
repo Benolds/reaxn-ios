@@ -19,6 +19,21 @@ class ViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleHelpNotification:", name: "helpNotification", object: nil)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "receivedHelpNotification", object: nil)
+    }
+    
+    //MARK: - Notifications
+    
+    func handleOpenNotification(notification : NSNotification) {
+        println("handle help notification")
+        println(notification)        
+    }
 
 
 }
