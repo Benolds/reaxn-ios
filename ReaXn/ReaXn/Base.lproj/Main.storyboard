@@ -32,6 +32,9 @@
                             <constraint firstAttribute="centerX" secondItem="F9T-x9-70S" secondAttribute="centerX" id="ihD-oG-nEa"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="button" destination="F9T-x9-70S" id="OYg-bx-juv"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>

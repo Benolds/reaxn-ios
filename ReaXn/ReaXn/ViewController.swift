@@ -10,6 +10,8 @@ import UIKit
 
 class ViewController: UIViewController {
     
+    @IBOutlet var button: UIButton!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
@@ -29,9 +31,30 @@ class ViewController: UIViewController {
     }
 
     @IBAction func buttonPressed(sender: UIButton) {
+//        createNotification()
+        createActionableNotification()
+    }
+    
+    func createActionableNotification() {
+        let timeDelayInSeconds = NSTimeInterval(15)
+        println("Scheduling an actionable notification in \(timeDelayInSeconds) seconds...")
+
+        // create a corresponding local notification
+        var notification = UILocalNotification()
+        notification.alertBody = "Notification text goes here" // text that will be displayed in the notification
+        notification.alertAction = "Action" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+        notification.fireDate = NSDate().dateByAddingTimeInterval(timeDelayInSeconds) // todo item due date (when notification will be fired)
+        notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+        notification.userInfo = ["UUID": NSUUID().UUIDString, ] // assign a unique identifier to the notification so that we can retrieve it later
+        notification.category = "OPEN_CATEGORY"
+        UIApplication.sharedApplication().scheduleLocalNotification(notification)        
+        
+    }
+    
+    func createNotification() {
         let timeDelayInSeconds = NSTimeInterval(15)
         println("Scheduling a notification in \(timeDelayInSeconds) seconds...")
-        
+
         // create a corresponding local notification
         var notification = UILocalNotification()
         notification.alertBody = "Notification text goes here" // text that will be displayed in the notification
@@ -48,9 +71,9 @@ class ViewController: UIViewController {
     func handlePushNotification(notification : NSNotification) {
         println("handle push notification")
         println(notification)
+        
+        button.backgroundColor = UIColor.redColor()
     }
-    
-    
 
 }
 
