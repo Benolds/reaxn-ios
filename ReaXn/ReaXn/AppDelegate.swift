@@ -22,9 +22,42 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         self.tapDetector.delegate = self
         
         UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler(expirationCallback)
-        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))
+        
+        registerForActionableNotifications()
+//        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))
 
         return true
+    }
+    
+    func registerForActionableNotifications() {
+        // 1. Create the actions **************************************************
+        // Open Action
+        let openAction = UIMutableUserNotificationAction()
+        openAction.identifier = "OPEN_ACTION"
+        openAction.title = "Open"
+        openAction.activationMode = UIUserNotificationActivationMode.Foreground
+        openAction.authenticationRequired = false
+        openAction.destructive = false
+        
+        // 2. Create the category ***********************************************
+        
+        // Category
+        let openCategory = UIMutableUserNotificationCategory()
+        openCategory.identifier = "OPEN_CATEGORY"
+        
+        // A. Set actions for the default context
+        openCategory.setActions([openAction],
+            forContext: UIUserNotificationActionContext.Default)
+        
+        // B. Set actions for the minimal context
+        openCategory.setActions([openAction],
+            forContext: UIUserNotificationActionContext.Minimal)
+        
+        // 3. Notification Registration *****************************************
+        
+        let types = UIUserNotificationType.Alert | UIUserNotificationType.Sound
+        let settings = UIUserNotificationSettings(forTypes: types, categories: NSSet(object: openCategory) as Set<NSObject>)
+        UIApplication.sharedApplication().registerUserNotificationSettings(settings)
     }
 
     func applicationWillResignActive(application: UIApplication) {
@@ -67,8 +100,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         notification.alertAction = "Action" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
         notification.soundName = UILocalNotificationDefaultSoundName // play default sound
         notification.userInfo = ["UUID": NSUUID().UUIDString, ] // assign a unique identifier to the notification so that we can retrieve it later
-        notification.category = "TODO_CATEGORY"
+        notification.category = "OPEN_CATEGORY"
         UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+    }
+    
+    func application(application: UIApplication, didReceiveLocalNotification notification: UILocalNotification) {
+        // Handle notification action *****************************************
+        if notification.category == "OPEN_CATEGORY" {
+            println("open received")
+            NSNotificationCenter.defaultCenter().postNotificationName("receivedOpenNotification", object: self, userInfo: notification.userInfo)
+        }
     }
 
 }
