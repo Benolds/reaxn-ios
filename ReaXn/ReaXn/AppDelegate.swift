@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         let helpAction = UIMutableUserNotificationAction()
         helpAction.identifier = "HELP_ACTION"
         helpAction.title = "Help"
-        helpAction.activationMode = UIUserNotificationActivationMode.Foreground
+        helpAction.activationMode = UIUserNotificationActivationMode.Background
         helpAction.authenticationRequired = false
         helpAction.destructive = false
         
@@ -122,6 +122,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
 //                            dialNumber("6083957313")
                         
                             sendSMS()
+                        
+//                            AudioServicesPlaySystemSound(kSystemSoundID_Vibrate)
 
                         default:
                             return

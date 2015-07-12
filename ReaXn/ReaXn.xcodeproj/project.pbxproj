@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0ABE44944805464C4B303E34 /* libPods-ReaXn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF35337AA31B583ECFA1FC51 /* libPods-ReaXn.a */; };
+		5DC7D05C1B5207700040C65E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC7D05B1B5207700040C65E /* AudioToolbox.framework */; };
 		AA58CDB61B51BF6A00939A2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58CDB51B51BF6A00939A2B /* AppDelegate.swift */; };
 		AA58CDB81B51BF6A00939A2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58CDB71B51BF6A00939A2B /* ViewController.swift */; };
 		AA58CDBB1B51BF6A00939A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA58CDB91B51BF6A00939A2B /* Main.storyboard */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		0C4A24C222B1491E759F6D98 /* Pods-ReaXn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReaXn.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReaXn/Pods-ReaXn.release.xcconfig"; sourceTree = "<group>"; };
+		5DC7D05B1B5207700040C65E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		6FCD176394AC16E145BB1694 /* Pods-ReaXn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReaXn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReaXn/Pods-ReaXn.debug.xcconfig"; sourceTree = "<group>"; };
 		AA58CDB01B51BF6A00939A2B /* ReaXn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReaXn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA58CDB41B51BF6A00939A2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -60,6 +62,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DC7D05C1B5207700040C65E /* AudioToolbox.framework in Frameworks */,
 				AA58CDDD1B51C4D300939A2B /* CoreMotion.framework in Frameworks */,
 				0ABE44944805464C4B303E34 /* libPods-ReaXn.a in Frameworks */,
 			);
@@ -146,6 +149,7 @@
 		AA58CDDE1B51C4E300939A2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5DC7D05B1B5207700040C65E /* AudioToolbox.framework */,
 				AA58CDDF1B51C76100939A2B /* TSCoreMotionListener.h */,
 				AA58CDE01B51C76100939A2B /* TSCoreMotionListener.m */,
 				AA58CDE11B51C76100939A2B /* TSTapDetector.h */,
