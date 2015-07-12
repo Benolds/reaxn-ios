@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
     var tapDetector: TSTapDetector!
+    var locationManager: CLLocationManager!
     
     var phone : TCDevice?
     var connection : TCConnection?
@@ -25,6 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         self.tapDetector = TSTapDetector.init()
         self.tapDetector.listener.collectMotionInformationWithInterval(10)
         self.tapDetector.delegate = self
+        
+        self.locationManager = CLLocationManager()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.distanceFilter = kCLDistanceFilterNone
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.startUpdatingLocation()
         
         UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler(expirationCallback)
         
@@ -140,21 +149,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         if knockKnockEnabled {
             
             if useNotifications {
-                createNotification()
+                createActionNotification()
                 
             } else {
                 sendSMS()
-                
+                createInfoNotification("Your text was sent successfully.")
             }
             
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate)) //TODO: does this even work?
             
         }
-
+        
     }
     
     
-    func createNotification() {
+    func createActionNotification() {
         if useNotifications {
             // create a corresponding local notification
             var notification = UILocalNotification()
@@ -165,6 +174,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
             notification.category = "HELP_CATEGORY"
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
+    }
+    
+    func createInfoNotification(text: String) {
+        let notification = UILocalNotification()
+        notification.alertBody = text
+        notification.userInfo = ["UUID": NSUUID().UUIDString, ]
+        notification.soundName = UILocalNotificationDefaultSoundName
+        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
     }
 
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
@@ -224,7 +241,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         if let storedMessage = NSUserDefaults.standardUserDefaults().objectForKey(Constants.DefaultsKey_TwilioMessage()) as? String {
             kMessage = "[**Test**] \(storedMessage)"
         } else {
-            kMessage = "[**ReaXnTest** Dad, I think I’m in danger. Please come get me. My location is: maps.google.com/?q=37.776938, -122.414892]"
+            kMessage = "[**ReaXnTest** Dad, I think I’m in danger. Please come get me.]"
+        }
+        
+        if NSUserDefaults.standardUserDefaults().boolForKey(Constants.DefaultsLocationInfoEnabledString()) {
+            let lat = self.locationManager.location.coordinate.latitude
+            let lng = self.locationManager.location.coordinate.longitude
+            kMessage += String(format: "My location is: maps.google.com/?q=%f,%f", lat, lng)
         }
         
         let urlString = "https://\(kTwilioSID):\(kTwilioSecret)@api.twilio.com/2010-04-01/Accounts/\(kTwilioSID)/SMS/Messages.json"

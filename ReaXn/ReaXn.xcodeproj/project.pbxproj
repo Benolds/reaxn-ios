@@ -23,6 +23,7 @@
 		AA58CDDD1B51C4D300939A2B /* CoreMotion.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AA58CDDC1B51C4D300939A2B /* CoreMotion.framework */; };
 		AA58CDE31B51C76100939A2B /* TSCoreMotionListener.m in Sources */ = {isa = PBXBuildFile; fileRef = AA58CDE01B51C76100939A2B /* TSCoreMotionListener.m */; };
 		AA58CDE41B51C76100939A2B /* TSTapDetector.m in Sources */ = {isa = PBXBuildFile; fileRef = AA58CDE21B51C76100939A2B /* TSTapDetector.m */; };
+		AAF0B06C1B52F544002B67E7 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = AAF0B06B1B52F544002B67E7 /* CoreLocation.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -62,6 +63,7 @@
 		AA58CDE01B51C76100939A2B /* TSCoreMotionListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSCoreMotionListener.m; path = ReaXn/TapShare/TSCoreMotionListener.m; sourceTree = "<group>"; };
 		AA58CDE11B51C76100939A2B /* TSTapDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSTapDetector.h; path = ReaXn/TapShare/TSTapDetector.h; sourceTree = "<group>"; };
 		AA58CDE21B51C76100939A2B /* TSTapDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSTapDetector.m; path = ReaXn/TapShare/TSTapDetector.m; sourceTree = "<group>"; };
+		AAF0B06B1B52F544002B67E7 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		AF35337AA31B583ECFA1FC51 /* libPods-ReaXn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReaXn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -70,6 +72,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AAF0B06C1B52F544002B67E7 /* CoreLocation.framework in Frameworks */,
 				5DC7D05C1B5207700040C65E /* AudioToolbox.framework in Frameworks */,
 				AA58CDDD1B51C4D300939A2B /* CoreMotion.framework in Frameworks */,
 				0ABE44944805464C4B303E34 /* libPods-ReaXn.a in Frameworks */,
@@ -161,6 +164,7 @@
 		AA58CDDE1B51C4E300939A2B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				AAF0B06B1B52F544002B67E7 /* CoreLocation.framework */,
 				5DC7D05B1B5207700040C65E /* AudioToolbox.framework */,
 				AA58CDDF1B51C76100939A2B /* TSCoreMotionListener.h */,
 				AA58CDE01B51C76100939A2B /* TSCoreMotionListener.m */,
