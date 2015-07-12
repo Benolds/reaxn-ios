@@ -133,11 +133,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
             completionHandler()
     }
     
-//    func sendSMS() {
-//        let token = "test123"
-//        phone = TCDevice(capabilityToken: token, delegate: nil)
-//    }
-    
     //MARK: - Twilio
     
     func sendSMS() {
@@ -151,24 +146,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         var kTwilioSID: String = "ACba74031ab5f7675cd18641412e5f4b54" //"ACa13736d34d4cb736cb4fc21a0d784691"
         var kTwilioSecret: String = "16dd90718333f34e750a6c91ce499eb8" //"e2fa5de05efca921764d19f6c6806592"
         var kFromNumber: String = phoneNumberTwilio //phoneNumberBen
-        var kToNumber: String = phoneNumberBen //phoneNumberSonny //phoneNumberSonny
-        var kMessage: String = "[**ReaXnTest** Help, I'm not sure if I feel safe right now.]"
+        
+        var kToNumber : String
+        if let storedToNumber = NSUserDefaults.standardUserDefaults().objectForKey("twilioToPhoneNumber") as? String {
+            kToNumber = storedToNumber
+        } else {
+            kToNumber = phoneNumberBen
+        }
+        
+        var kMessage : String
+        if let storedMessage = NSUserDefaults.standardUserDefaults().objectForKey("twilioMessage") as? String {
+            kMessage = storedMessage
+        } else {
+            kMessage = "[**ReaXnTest** Help, I'm not sure if I feel safe right now.]"
+        }
+        
         let urlString = "https://\(kTwilioSID):\(kTwilioSecret)@api.twilio.com/2010-04-01/Accounts/\(kTwilioSID)/SMS/Messages.json"
-//        let urlString = "https://api.twilio.com/2010-04-01/Accounts/\(kTwilioSID)/SMS/Messages.json"
         
         if let url = NSURL(string: urlString) {
             var request: NSMutableURLRequest = NSMutableURLRequest()
             request.URL = url
             request.HTTPMethod = "POST"
             var bodyString: String = "From=\(kFromNumber)&To=\(kToNumber)&Body=\(kMessage)"
-            
             if let data: NSData = bodyString.dataUsingEncoding(NSUTF8StringEncoding) {
                 request.HTTPBody = data
-//                
-//                NSString *authStr = [NSString stringWithFormat:@"%@:", apiKey];
-//                NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
-//                NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
-//                [request setValue:authValue forHTTPHeaderField:@"Authorization"];
                 
                 var response: NSURLResponse?
                 var error: NSError?
@@ -182,11 +183,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         }
     }
     
-    func dialNumber(number : String) {
-        let phoneNumber = "telprompt://\(number)"
-        println("calling \(phoneNumber)")
-        UIApplication.sharedApplication().openURL(NSURL(string: phoneNumber)!)
-    }
+//    func dialNumber(number : String) {
+//        let phoneNumber = "telprompt://\(number)"
+//        println("calling \(phoneNumber)")
+//        UIApplication.sharedApplication().openURL(NSURL(string: phoneNumber)!)
+//    }
 
 }
 
