@@ -60,6 +60,10 @@ class MainViewController: UIViewController {
         view.addGestureRecognizer(leftSwipe!)
     }
     
+    override func viewDidAppear(animated: Bool) {
+        self.refreshViewForActionType(self.currentActionType, newActionState: ActionState.Waiting)
+    }
+    
     override func viewWillDisappear(animated: Bool) {
         if let gesture = rightSwipe {
             view.removeGestureRecognizer(gesture)
@@ -200,11 +204,17 @@ class MainViewController: UIViewController {
                 if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
                     appDelegate.sendSMS()
                 }
+                
+            } else if self.currentActionType == ActionType.AddMore {
+                self.performSegueWithIdentifier("addMoreSegue", sender: self)
+                return
             }
+            
             
             delay(10.0) {
                 self.refreshViewForActionType(self.currentActionType, newActionState: ActionState.Waiting)
             }
+            
             
         } /*else {
             self.refreshViewForActionType(self.currentActionType, newActionState: ActionState.Waiting)
@@ -256,6 +266,11 @@ class MainViewController: UIViewController {
         // Pass the selected object to the new view controller.
         if let settingsViewController = segue.destinationViewController as? SettingsViewController {
             settingsViewController.currentActionType = self.currentActionType
+        }
+        
+        
+        if let addMoreViewController = segue.destinationViewController as? AddMoreViewController {
+            addMoreViewController.currentActionType = self.currentActionType
         }
     }
     
