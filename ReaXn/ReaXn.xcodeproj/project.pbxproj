@@ -9,8 +9,9 @@
 /* Begin PBXBuildFile section */
 		0ABE44944805464C4B303E34 /* libPods-ReaXn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF35337AA31B583ECFA1FC51 /* libPods-ReaXn.a */; };
 		5DC7D05C1B5207700040C65E /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5DC7D05B1B5207700040C65E /* AudioToolbox.framework */; };
+		5DC7D0601B520F560040C65E /* MainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5DC7D05F1B520F560040C65E /* MainViewController.swift */; };
 		AA58CDB61B51BF6A00939A2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58CDB51B51BF6A00939A2B /* AppDelegate.swift */; };
-		AA58CDB81B51BF6A00939A2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58CDB71B51BF6A00939A2B /* ViewController.swift */; };
+		AA58CDB81B51BF6A00939A2B /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58CDB71B51BF6A00939A2B /* SettingsViewController.swift */; };
 		AA58CDBB1B51BF6A00939A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA58CDB91B51BF6A00939A2B /* Main.storyboard */; };
 		AA58CDBD1B51BF6A00939A2B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AA58CDBC1B51BF6A00939A2B /* Images.xcassets */; };
 		AA58CDC01B51BF6A00939A2B /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = AA58CDBE1B51BF6A00939A2B /* LaunchScreen.xib */; };
@@ -34,11 +35,12 @@
 /* Begin PBXFileReference section */
 		0C4A24C222B1491E759F6D98 /* Pods-ReaXn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReaXn.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReaXn/Pods-ReaXn.release.xcconfig"; sourceTree = "<group>"; };
 		5DC7D05B1B5207700040C65E /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		5DC7D05F1B520F560040C65E /* MainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainViewController.swift; sourceTree = "<group>"; };
 		6FCD176394AC16E145BB1694 /* Pods-ReaXn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReaXn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReaXn/Pods-ReaXn.debug.xcconfig"; sourceTree = "<group>"; };
 		AA58CDB01B51BF6A00939A2B /* ReaXn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReaXn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA58CDB41B51BF6A00939A2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA58CDB51B51BF6A00939A2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		AA58CDB71B51BF6A00939A2B /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		AA58CDB71B51BF6A00939A2B /* SettingsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		AA58CDBA1B51BF6A00939A2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AA58CDBC1B51BF6A00939A2B /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		AA58CDBF1B51BF6A00939A2B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -112,7 +114,8 @@
 			isa = PBXGroup;
 			children = (
 				AA58CDB51B51BF6A00939A2B /* AppDelegate.swift */,
-				AA58CDB71B51BF6A00939A2B /* ViewController.swift */,
+				AA58CDB71B51BF6A00939A2B /* SettingsViewController.swift */,
+				5DC7D05F1B520F560040C65E /* MainViewController.swift */,
 				AA58CDB91B51BF6A00939A2B /* Main.storyboard */,
 				AA58CDBC1B51BF6A00939A2B /* Images.xcassets */,
 				AA58CDBE1B51BF6A00939A2B /* LaunchScreen.xib */,
@@ -298,8 +301,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5DC7D0601B520F560040C65E /* MainViewController.swift in Sources */,
 				AA58CDE41B51C76100939A2B /* TSTapDetector.m in Sources */,
-				AA58CDB81B51BF6A00939A2B /* ViewController.swift in Sources */,
+				AA58CDB81B51BF6A00939A2B /* SettingsViewController.swift in Sources */,
 				AA58CDE31B51C76100939A2B /* TSCoreMotionListener.m in Sources */,
 				AA58CDB61B51BF6A00939A2B /* AppDelegate.swift in Sources */,
 				AA58CDDA1B51C35B00939A2B /* ARAudioRecognizer.m in Sources */,
