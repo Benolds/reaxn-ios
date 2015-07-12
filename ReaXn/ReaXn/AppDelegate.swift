@@ -150,11 +150,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate, CL
         if knockKnockEnabled {
             
             if useNotifications {
-                createNotification()
+                createActionNotification()
                 
             } else {
                 sendSMS()
-                
+                createInfoNotification("Your text was sent successfully.")
             }
             
             AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate)) //TODO: does this even work?
@@ -164,7 +164,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate, CL
     }
     
     
-    func createNotification() {
+    func createActionNotification() {
         if useNotifications {
             // create a corresponding local notification
             var notification = UILocalNotification()
@@ -175,6 +175,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate, CL
             notification.category = "HELP_CATEGORY"
             UIApplication.sharedApplication().presentLocalNotificationNow(notification)
         }
+    }
+    
+    func createInfoNotification(text: String) {
+        let notification = UILocalNotification()
+        notification.alertBody = text
+        notification.userInfo = ["UUID": NSUUID().UUIDString, ]
+        notification.soundName = UILocalNotificationDefaultSoundName
+        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
     }
 
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
