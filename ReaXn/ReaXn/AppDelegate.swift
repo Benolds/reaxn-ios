@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import CoreLocation
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate, CLLocationManagerDelegate {
 
     var window: UIWindow?
     var tapDetector: TSTapDetector!
+    var locationManager: CLLocationManager!
     
     var phone : TCDevice?
     var connection : TCConnection?
@@ -25,6 +27,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         self.tapDetector = TSTapDetector.init()
         self.tapDetector.listener.collectMotionInformationWithInterval(10)
         self.tapDetector.delegate = self
+        
+        // Factor this to only be on when user sets location
+        self.locationManager = CLLocationManager()
+        self.locationManager.delegate = self
+        self.locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        self.locationManager.distanceFilter = kCLDistanceFilterNone
+        self.locationManager.requestAlwaysAuthorization()
+        self.locationManager.startUpdatingLocation()
         
         UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler(expirationCallback)
         
@@ -225,6 +235,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
             kMessage = "[**Test**] \(storedMessage)"
         } else {
             kMessage = "[**ReaXnTest** Help, I'm not sure if I feel safe right now.]"
+        }
+        
+        if NSUserDefaults.standardUserDefaults().boolForKey(Constants.DefaultsLocationInfoEnabledString()) {
+            let lat = self.locationManager.location.coordinate.latitude
+            let lng = self.locationManager.location.coordinate.longitude
+            kMessage += String(format: "\n\nI'm located at maps.google.com/?q=%f,%f", lat, lng)
         }
         
         let urlString = "https://\(kTwilioSID):\(kTwilioSecret)@api.twilio.com/2010-04-01/Accounts/\(kTwilioSID)/SMS/Messages.json"
