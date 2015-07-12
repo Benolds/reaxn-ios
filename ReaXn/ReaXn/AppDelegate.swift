@@ -144,11 +144,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         let phoneNumberKevin = "+6083957313"
         let phoneNumberBen = "+6178179292"
         let phoneNumberSonny = "+6284449233"
+        let phoneNumberTwilio = "+16694004715"
         
-        var kTwilioSID: String = "ACa13736d34d4cb736cb4fc21a0d784691"
-        var kTwilioSecret: String = "e2fa5de05efca921764d19f6c6806592"
-        var kFromNumber: String = phoneNumberBen
-        var kToNumber: String = phoneNumberSonny
+        var kTwilioSID: String = "ACba74031ab5f7675cd18641412e5f4b54" //"ACa13736d34d4cb736cb4fc21a0d784691"
+        var kTwilioSecret: String = "16dd90718333f34e750a6c91ce499eb8" //"e2fa5de05efca921764d19f6c6806592"
+        var kFromNumber: String = phoneNumberTwilio //phoneNumberBen
+        var kToNumber: String = phoneNumberSonny //phoneNumberSonny
         var kMessage: String = "ReaXnTest"
         let urlString = "https://\(kTwilioSID):\(kTwilioSecret)@api.twilio.com/2010-04-01/Accounts/\(kTwilioSID)/SMS/Messages.json"
 //        let urlString = "https://api.twilio.com/2010-04-01/Accounts/\(kTwilioSID)/SMS/Messages.json"
