@@ -7,24 +7,22 @@
 //
 
 import UIKit
+import ReaXnFramework
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var tapDetector: TSTapDetector!
+    var ReaXnClient: ReaXn!
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
         // initialize tap detector
-        self.tapDetector = TSTapDetector.init()
-        self.tapDetector.listener.collectMotionInformationWithInterval(10)
-        self.tapDetector.delegate = self
+        ReaXnClient = ReaXn(callback: createNotification)
         
         UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler(expirationCallback)
         
         registerForActionableNotifications()
-//        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))
 
         return true
     }
@@ -90,6 +88,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
     
     // Tap detection callback
     func detectorDidDetectTap(detector: TSTapDetector!) {
+        println("Got a knock!")
         createNotification()
     }
     

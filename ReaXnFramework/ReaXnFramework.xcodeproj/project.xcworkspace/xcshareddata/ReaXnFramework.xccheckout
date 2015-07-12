@@ -5,7 +5,7 @@
 	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
 	<false/>
 	<key>IDESourceControlProjectIdentifier</key>
-	<string>AF358B31-119C-4CA9-98FA-DA53C0F6D907</string>
+	<string>FFB02CCB-7CAC-4AEE-AFD0-FA37EC586191</string>
 	<key>IDESourceControlProjectName</key>
 	<string>project</string>
 	<key>IDESourceControlProjectOriginsDictionary</key>
@@ -14,7 +14,7 @@
 		<string>github.com:Benolds/reaxn-ios.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>ReaXn/ReaXn.xcodeproj/project.xcworkspace</string>
+	<string>ReaXnFramework/ReaXnFramework.xcodeproj/project.xcworkspace</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>3A9348F0EEFDF462CD5F93B9A821EC02091732A4</key>
