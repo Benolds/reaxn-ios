@@ -31,6 +31,9 @@ class MainViewController: UIViewController {
     
     var currentActionState : ActionState = ActionState.Waiting
     var currentActionType : ActionType = ActionType.Message
+    
+    var rightSwipe : UISwipeGestureRecognizer?
+    var leftSwipe : UISwipeGestureRecognizer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -47,6 +50,33 @@ class MainViewController: UIViewController {
         navigationController?.setNavigationBarHidden(navigationController?.navigationBarHidden == false, animated: true) //or animated: false
         
         self.refreshViewForActionType(self.currentActionType, newActionState: self.currentActionState)
+        
+        rightSwipe = UISwipeGestureRecognizer(target: self, action: "swipeRight")
+        rightSwipe!.direction = UISwipeGestureRecognizerDirection.Right
+        view.addGestureRecognizer(rightSwipe!)
+        
+        leftSwipe = UISwipeGestureRecognizer(target: self, action: "swipeLeft")
+        leftSwipe!.direction = UISwipeGestureRecognizerDirection.Left
+        view.addGestureRecognizer(leftSwipe!)
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
+        if let gesture = rightSwipe {
+            view.removeGestureRecognizer(gesture)
+        }
+        if let gesture = leftSwipe {
+            view.removeGestureRecognizer(gesture)
+        }
+    }
+    
+    func swipeRight() {
+        println("swipe right")
+        switchPrevAction(nil)
+    }
+    
+    func swipeLeft() {
+        println("swipe left")
+        switchNextAction(nil)
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -191,7 +221,7 @@ class MainViewController: UIViewController {
             dispatch_get_main_queue(), closure)
     }
 
-    @IBAction func switchNextAction(sender: UIButton) {
+    @IBAction func switchNextAction(sender: UIButton?) {
         switch self.currentActionType {
         case ActionType.Message:
             refreshViewForActionType(ActionType.Call, newActionState: ActionState.Waiting)
@@ -205,7 +235,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func switchPrevAction(sender: UIButton) {
+    @IBAction func switchPrevAction(sender: UIButton?) {
         switch self.currentActionType {
         case ActionType.Message:
             refreshViewForActionType(ActionType.AddMore, newActionState: ActionState.Waiting)
