@@ -9,6 +9,8 @@
 import UIKit
 
 class SettingsViewController: UIViewController, UITextFieldDelegate {
+    
+    var currentActionType = MainViewController.ActionType.Message
 
     @IBOutlet var phoneNumberField: UITextField!
     @IBOutlet var messageField: UITextField!
@@ -16,6 +18,8 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+        
+        self.title = getTitleForActionType(currentActionType)
     }
 
     override func didReceiveMemoryWarning() {
@@ -34,11 +38,24 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     override func viewWillAppear(animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true) //or animated: false
 
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleHelpNotification:", name: "receivedHelpNotification", object: nil)
+//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleHelpNotification:", name: "receivedHelpNotification", object: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: "receivedHelpNotification", object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name: "receivedHelpNotification", object: nil)
+    }
+    
+    func getTitleForActionType(actionType : MainViewController.ActionType) -> String {
+        switch actionType {
+        case MainViewController.ActionType.Message:
+            return "Messages"
+        case MainViewController.ActionType.Call:
+            return "Phone"
+        case MainViewController.ActionType.VoiceMemo:
+            return "Voice Memos"
+        case MainViewController.ActionType.AddMore:
+            return "Add More"
+        }
     }
     
     //MARK: - UIActions
@@ -62,11 +79,11 @@ class SettingsViewController: UIViewController, UITextFieldDelegate {
     
     //MARK: - Notifications
     
-    func handleOpenNotification(notification : NSNotification) {
-        println("handle help notification")
-        println(notification)
-//        sendSMS()
-    }
+//    func handleOpenNotification(notification : NSNotification) {
+//        println("handle help notification")
+//        println(notification)
+////        sendSMS()
+//    }
 
 }
 

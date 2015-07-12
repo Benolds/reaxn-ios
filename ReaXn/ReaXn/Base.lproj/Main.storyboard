@@ -22,13 +22,6 @@
                                     <action selector="triggerAction:" destination="wol-3i-NKu" eventType="touchUpInside" id="PIb-cj-r49"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MESSAGES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7tm-RV-ZxN">
-                                <rect key="frame" x="85" y="100" width="150" height="42"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
-                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sent Successfully" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5d9-aZ-wCd">
                                 <rect key="frame" x="95" y="443" width="130" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -47,21 +40,10 @@
                                     <segue destination="vXZ-lx-hvc" kind="push" id="rys-1H-hHS"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="buZ-Qe-Ynj">
-                                <rect key="frame" x="272" y="269" width="32" height="30"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="gfg-Kp-t6Y">
+                                <rect key="frame" x="-38" y="246" width="75" height="75"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Next">
-                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="switchNextAction:" destination="wol-3i-NKu" eventType="touchUpInside" id="PnO-EO-EjH"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="gfg-Kp-t6Y">
-                                <rect key="frame" x="16" y="269" width="31" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Prev">
+                                <state key="normal" title="Prev" image="PlusSmall">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
@@ -69,6 +51,24 @@
                                     <action selector="switchPrevAction:" destination="wol-3i-NKu" eventType="touchUpInside" id="d2H-Rf-RVu"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="buZ-Qe-Ynj">
+                                <rect key="frame" x="281" y="246" width="75" height="75"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Next" image="PhoneSmall">
+                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <connections>
+                                    <action selector="switchNextAction:" destination="wol-3i-NKu" eventType="touchUpInside" id="PnO-EO-EjH"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="MESSAGES" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="7tm-RV-ZxN">
+                                <rect key="frame" x="52" y="100" width="217" height="42"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" weight="light" pointSize="24"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.41960784313725491" green="0.76078431372549016" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                     </view>
@@ -76,6 +76,7 @@
                     <connections>
                         <outlet property="actionButton" destination="8Br-3T-gA5" id="nMT-T1-ogz"/>
                         <outlet property="actionTypeLabel" destination="7tm-RV-ZxN" id="yr7-De-sYY"/>
+                        <outlet property="nextTypeButton" destination="buZ-Qe-Ynj" id="JCH-gI-ugF"/>
                         <outlet property="previousTypeButton" destination="gfg-Kp-t6Y" id="BVC-Ik-qd6"/>
                         <outlet property="sentSuccessfullyLabel" destination="5d9-aZ-wCd" id="Fqg-dF-Z8k"/>
                     </connections>
@@ -176,6 +177,8 @@
     </scenes>
     <resources>
         <image name="MessageBig" width="352" height="351"/>
+        <image name="PhoneSmall" width="243" height="242"/>
+        <image name="PlusSmall" width="254" height="253"/>
         <image name="Setup" width="17" height="17"/>
     </resources>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">

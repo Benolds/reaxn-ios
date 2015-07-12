@@ -33,7 +33,7 @@ class MainViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
 
@@ -75,7 +75,7 @@ class MainViewController: UIViewController {
             case ActionType.VoiceMemo:
                 self.view.backgroundColor = UIColor(red:0.98, green:0.73, blue:0.29, alpha:1.0)
                 actionButton.setImage(UIImage(named: "VoiceBig"), forState: UIControlState.Normal)
-                
+
             case ActionType.AddMore:
                 self.view.backgroundColor = UIColor(red:0.15, green:0.18, blue:0.33, alpha:1.0)
                 actionButton.setImage(UIImage(named: "PlusBig"), forState: UIControlState.Normal)
@@ -90,7 +90,7 @@ class MainViewController: UIViewController {
             case ActionType.Message:
                 self.view.backgroundColor = UIColor(red:0.33, green:0.80, blue:0.82, alpha:1.0)
                 actionButton.setImage(UIImage(named: "MessageBigDone"), forState: UIControlState.Normal)
-                
+
             case ActionType.Call:
                 self.view.backgroundColor = UIColor(red:0.94, green:0.38, blue:0.45, alpha:1.0)
                 actionButton.setImage(UIImage(named: "PhoneBigDone"), forState: UIControlState.Normal)
@@ -98,7 +98,7 @@ class MainViewController: UIViewController {
             case ActionType.VoiceMemo:
                 self.view.backgroundColor = UIColor(red:0.98, green:0.69, blue:0.20, alpha:1.0)
                 actionButton.setImage(UIImage(named: "VoiceBigDone"), forState: UIControlState.Normal)
-                
+
             case ActionType.AddMore:
                 self.view.backgroundColor = UIColor(red:0.15, green:0.18, blue:0.33, alpha:1.0)
                 actionButton.setImage(UIImage(named: "PlusBig"), forState: UIControlState.Normal)
@@ -106,6 +106,33 @@ class MainViewController: UIViewController {
             }
             
             sentSuccessfullyLabel.hidden = false
+            
+        }
+        
+        updateUIForActionType(newActionType)
+    }
+    
+    func updateUIForActionType(actionType : ActionType) {
+        switch actionType {
+        case ActionType.Message:
+            actionTypeLabel.text = "MESSAGES"
+            previousTypeButton.setImage(UIImage(named: "PlusSmall"), forState: UIControlState.Normal)
+            nextTypeButton.setImage(UIImage(named: "PhoneSmall"), forState: UIControlState.Normal)
+            
+        case ActionType.Call:
+            actionTypeLabel.text = "PHONE"
+            previousTypeButton.setImage(UIImage(named: "MessageSmall"), forState: UIControlState.Normal)
+            nextTypeButton.setImage(UIImage(named: "VoiceSmall"), forState: UIControlState.Normal)
+            
+        case ActionType.VoiceMemo:
+            actionTypeLabel.text = "VOICE MEMOS"
+            previousTypeButton.setImage(UIImage(named: "PhoneSmall"), forState: UIControlState.Normal)
+            nextTypeButton.setImage(UIImage(named: "PlusSmall"), forState: UIControlState.Normal)
+            
+        case ActionType.AddMore:
+            actionTypeLabel.text = "ADD MORE"
+            previousTypeButton.setImage(UIImage(named: "VoiceSmall"), forState: UIControlState.Normal)
+            nextTypeButton.setImage(UIImage(named: "MessageSmall"), forState: UIControlState.Normal)
             
         }
     }
@@ -120,7 +147,7 @@ class MainViewController: UIViewController {
         
     }
 
-    @IBAction func switchPrevAction(sender: UIButton) {
+    @IBAction func switchNextAction(sender: UIButton) {
         switch self.currentActionType {
         case ActionType.Message:
             refreshViewForActionType(ActionType.Call, newActionState: ActionState.Waiting)
@@ -134,7 +161,7 @@ class MainViewController: UIViewController {
         }
     }
     
-    @IBAction func switchNextAction(sender: UIButton) {
+    @IBAction func switchPrevAction(sender: UIButton) {
         switch self.currentActionType {
         case ActionType.Message:
             refreshViewForActionType(ActionType.AddMore, newActionState: ActionState.Waiting)
@@ -148,14 +175,17 @@ class MainViewController: UIViewController {
     }
     
     
-    /*
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if let settingsViewController = segue.destinationViewController as? SettingsViewController {
+            settingsViewController.currentActionType = self.currentActionType
+        }
     }
-    */
+    
 
 }

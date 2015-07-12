@@ -26,12 +26,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ReaXn/MainViewController.swift"
-            timestampString = "458376984.778111"
+            timestampString = "458378887.129499"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "113"
-            endingLineNumber = "113"
-            landmarkName = "switchPrevAction(_:)"
+            startingLineNumber = "150"
+            endingLineNumber = "150"
+            landmarkName = "switchNextAction(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -42,12 +42,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ReaXn/MainViewController.swift"
-            timestampString = "458376984.778111"
+            timestampString = "458378887.129499"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "124"
-            endingLineNumber = "124"
-            landmarkName = "switchNextAction(_:)"
+            startingLineNumber = "164"
+            endingLineNumber = "164"
+            landmarkName = "switchPrevAction(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
