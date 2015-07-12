@@ -21,7 +21,7 @@ class ViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleHelpNotification:", name: "helpNotification", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleHelpNotification:", name: "receivedHelpNotification", object: nil)
     }
     
     override func viewWillDisappear(animated: Bool) {
@@ -32,9 +32,9 @@ class ViewController: UIViewController {
     
     func handleOpenNotification(notification : NSNotification) {
         println("handle help notification")
-        println(notification)        
+        println(notification)
+//        sendSMS()
     }
-
 
 }
 

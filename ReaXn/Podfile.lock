@@ -1,0 +1,10 @@
+PODS:
+  - TwilioSDK (1.2.3)
+
+DEPENDENCIES:
+  - TwilioSDK (~> 1.2)
+
+SPEC CHECKSUMS:
+  TwilioSDK: a9aeead884e926858a38b6013e583ea0443b1f1c
+
+COCOAPODS: 0.37.2

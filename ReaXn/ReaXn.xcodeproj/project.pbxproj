@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0ABE44944805464C4B303E34 /* libPods-ReaXn.a in Frameworks */ = {isa = PBXBuildFile; fileRef = AF35337AA31B583ECFA1FC51 /* libPods-ReaXn.a */; };
 		AA58CDB61B51BF6A00939A2B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58CDB51B51BF6A00939A2B /* AppDelegate.swift */; };
 		AA58CDB81B51BF6A00939A2B /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = AA58CDB71B51BF6A00939A2B /* ViewController.swift */; };
 		AA58CDBB1B51BF6A00939A2B /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AA58CDB91B51BF6A00939A2B /* Main.storyboard */; };
@@ -30,6 +31,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C4A24C222B1491E759F6D98 /* Pods-ReaXn.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReaXn.release.xcconfig"; path = "Pods/Target Support Files/Pods-ReaXn/Pods-ReaXn.release.xcconfig"; sourceTree = "<group>"; };
+		6FCD176394AC16E145BB1694 /* Pods-ReaXn.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ReaXn.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ReaXn/Pods-ReaXn.debug.xcconfig"; sourceTree = "<group>"; };
 		AA58CDB01B51BF6A00939A2B /* ReaXn.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReaXn.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AA58CDB41B51BF6A00939A2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AA58CDB51B51BF6A00939A2B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -49,6 +52,7 @@
 		AA58CDE01B51C76100939A2B /* TSCoreMotionListener.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSCoreMotionListener.m; path = ReaXn/TapShare/TSCoreMotionListener.m; sourceTree = "<group>"; };
 		AA58CDE11B51C76100939A2B /* TSTapDetector.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TSTapDetector.h; path = ReaXn/TapShare/TSTapDetector.h; sourceTree = "<group>"; };
 		AA58CDE21B51C76100939A2B /* TSTapDetector.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TSTapDetector.m; path = ReaXn/TapShare/TSTapDetector.m; sourceTree = "<group>"; };
+		AF35337AA31B583ECFA1FC51 /* libPods-ReaXn.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-ReaXn.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +61,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AA58CDDD1B51C4D300939A2B /* CoreMotion.framework in Frameworks */,
+				0ABE44944805464C4B303E34 /* libPods-ReaXn.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -70,6 +75,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		823CB00367AD1082C73248F4 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				6FCD176394AC16E145BB1694 /* Pods-ReaXn.debug.xcconfig */,
+				0C4A24C222B1491E759F6D98 /* Pods-ReaXn.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		AA58CDA71B51BF6A00939A2B = {
 			isa = PBXGroup;
 			children = (
@@ -78,6 +92,7 @@
 				AA58CDB21B51BF6A00939A2B /* ReaXn */,
 				AA58CDC81B51BF6A00939A2B /* ReaXnTests */,
 				AA58CDB11B51BF6A00939A2B /* Products */,
+				823CB00367AD1082C73248F4 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -139,6 +154,7 @@
 				AA58CDD81B51C35B00939A2B /* ARAudioRecognizer.m */,
 				AA58CDD71B51C35B00939A2B /* ARAudioRecognizer.h */,
 				AA58CDDC1B51C4D300939A2B /* CoreMotion.framework */,
+				AF35337AA31B583ECFA1FC51 /* libPods-ReaXn.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -150,9 +166,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = AA58CDCF1B51BF6A00939A2B /* Build configuration list for PBXNativeTarget "ReaXn" */;
 			buildPhases = (
+				485117839F82EAF72C6E505A /* Check Pods Manifest.lock */,
 				AA58CDAC1B51BF6A00939A2B /* Sources */,
 				AA58CDAD1B51BF6A00939A2B /* Frameworks */,
 				AA58CDAE1B51BF6A00939A2B /* Resources */,
+				A5C7B7B6E4502DCF1B0BDFBB /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -237,6 +255,39 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		485117839F82EAF72C6E505A /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		A5C7B7B6E4502DCF1B0BDFBB /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ReaXn/Pods-ReaXn-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		AA58CDAC1B51BF6A00939A2B /* Sources */ = {
@@ -372,6 +423,7 @@
 		};
 		AA58CDD01B51BF6A00939A2B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 6FCD176394AC16E145BB1694 /* Pods-ReaXn.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ReaXn/Info.plist;
@@ -384,6 +436,7 @@
 		};
 		AA58CDD11B51BF6A00939A2B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0C4A24C222B1491E759F6D98 /* Pods-ReaXn.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ReaXn/Info.plist;

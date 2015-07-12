@@ -13,6 +13,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
 
     var window: UIWindow?
     var tapDetector: TSTapDetector!
+    
+    var phone : TCDevice?
+    var connection : TCConnection?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -113,10 +116,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
                     switch action{
                         case "HELP_ACTION":
 //                            NSNotificationCenter.defaultCenter().postNotificationName("helpNotification", object: self, userInfo: notification.userInfo)
-                            NSNotificationCenter.defaultCenter().postNotificationName("receivedHelpNotification", object: self, userInfo: notification.userInfo)
+//                            NSNotificationCenter.defaultCenter().postNotificationName("receivedHelpNotification", object: self, userInfo: notification.userInfo)
                         
                             println("Help action triggered")
 //                            dialNumber("6083957313")
+                        
+                            sendSMS()
 
                         default:
                             return
@@ -124,6 +129,54 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
                 }
             }
             completionHandler()
+    }
+    
+//    func sendSMS() {
+//        let token = "test123"
+//        phone = TCDevice(capabilityToken: token, delegate: nil)
+//    }
+    
+    //MARK: - Twilio
+    
+    func sendSMS() {
+        println("Sending request.")
+        
+        let phoneNumberKevin = "+6083957313"
+        let phoneNumberBen = "+6178179292"
+        let phoneNumberSonny = "+6284449233"
+        
+        var kTwilioSID: String = "ACa13736d34d4cb736cb4fc21a0d784691"
+        var kTwilioSecret: String = "e2fa5de05efca921764d19f6c6806592"
+        var kFromNumber: String = phoneNumberBen
+        var kToNumber: String = phoneNumberSonny
+        var kMessage: String = "ReaXnTest"
+        let urlString = "https://\(kTwilioSID):\(kTwilioSecret)@api.twilio.com/2010-04-01/Accounts/\(kTwilioSID)/SMS/Messages.json"
+//        let urlString = "https://api.twilio.com/2010-04-01/Accounts/\(kTwilioSID)/SMS/Messages.json"
+        
+        if let url = NSURL(string: urlString) {
+            var request: NSMutableURLRequest = NSMutableURLRequest()
+            request.URL = url
+            request.HTTPMethod = "POST"
+            var bodyString: String = "From=\(kFromNumber)&To=\(kToNumber)&Body=\(kMessage)"
+            
+            if let data: NSData = bodyString.dataUsingEncoding(NSUTF8StringEncoding) {
+                request.HTTPBody = data
+//                
+//                NSString *authStr = [NSString stringWithFormat:@"%@:", apiKey];
+//                NSData *authData = [authStr dataUsingEncoding:NSASCIIStringEncoding];
+//                NSString *authValue = [NSString stringWithFormat:@"Basic %@", [authData base64EncodingWithLineLength:80]];
+//                [request setValue:authValue forHTTPHeaderField:@"Authorization"];
+                
+                var response: NSURLResponse?
+                var error: NSError?
+                let urlData = NSURLConnection.sendSynchronousRequest(request, returningResponse: &response, error: &error)
+                
+                if let httpResponse = response as? NSHTTPURLResponse {
+                    println(httpResponse.statusCode)
+                }
+            }
+            
+        }
     }
     
     func dialNumber(number : String) {
