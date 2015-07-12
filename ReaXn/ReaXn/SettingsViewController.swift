@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SettingsViewController: UIViewController {
+class SettingsViewController: UIViewController, UITextFieldDelegate {
 
     @IBOutlet var phoneNumberField: UITextField!
     @IBOutlet var messageField: UITextField!
@@ -43,19 +43,19 @@ class SettingsViewController: UIViewController {
     
     //MARK: - UIActions
     
-    @IBAction func saveNumber(sender: UITextField) {
-        NSUserDefaults.standardUserDefaults().setObject(sender.text, forKey: "twilioToPhoneNumber")
+    @IBAction func saveNumber(sender: UIButton) {
+        NSUserDefaults.standardUserDefaults().setObject(phoneNumberField.text, forKey: "twilioToPhoneNumber")
         NSUserDefaults.standardUserDefaults().synchronize()
         
-        let savedNumber = NSUserDefaults.standardUserDefaults().objectForKey("twilioToPhoneNumber")
+        let savedNumber: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("twilioToPhoneNumber")
         println("savedNumber: \(savedNumber)")
     }
     
-    @IBAction func saveMessage(sender: UITextField) {
-        NSUserDefaults.standardUserDefaults().setObject(sender.text, forKey: "twilioMessage")
+    @IBAction func saveMessage(sender: UIButton) {
+        NSUserDefaults.standardUserDefaults().setObject(messageField.text, forKey: "twilioMessage")
         NSUserDefaults.standardUserDefaults().synchronize()
         
-        let savedMessage = NSUserDefaults.standardUserDefaults().objectForKey("twilioMessage")
+        let savedMessage: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey("twilioMessage")
         println("savedMessage: \(savedMessage)")
 
     }
