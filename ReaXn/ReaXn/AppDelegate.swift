@@ -224,7 +224,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         if let storedMessage = NSUserDefaults.standardUserDefaults().objectForKey(Constants.DefaultsKey_TwilioMessage()) as? String {
             kMessage = "[**Test**] \(storedMessage)"
         } else {
-            kMessage = "[**ReaXnTest** Help, I'm not sure if I feel safe right now.]"
+            kMessage = "[**ReaXnTest** Dad, I think I’m in danger. Please come get me. My location is: maps.google.com/?q=37.776938, -122.414892]"
         }
         
         let urlString = "https://\(kTwilioSID):\(kTwilioSecret)@api.twilio.com/2010-04-01/Accounts/\(kTwilioSID)/SMS/Messages.json"

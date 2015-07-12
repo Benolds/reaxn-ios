@@ -117,6 +117,7 @@ class MainViewController: UIViewController {
 
             }
             
+            actionButton.enabled = true
             sentSuccessfullyLabel.hidden = true
             
         } else {
@@ -140,6 +141,7 @@ class MainViewController: UIViewController {
 
             }
             
+            actionButton.enabled = false
             sentSuccessfullyLabel.hidden = false
             
         }
@@ -210,11 +212,9 @@ class MainViewController: UIViewController {
                 return
             }
             
-            
-            delay(10.0) {
+            delay(5.0) {
                 self.refreshViewForActionType(self.currentActionType, newActionState: ActionState.Waiting)
             }
-            
             
         } /*else {
             self.refreshViewForActionType(self.currentActionType, newActionState: ActionState.Waiting)
