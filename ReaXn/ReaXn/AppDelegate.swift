@@ -28,6 +28,33 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         
         UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler(expirationCallback)
         
+        // KNOCK KNOCK ENABLED
+        if NSUserDefaults.standardUserDefaults().objectForKey(Constants.DefaultsKnockKnockEnabledString()) == nil {
+
+            println("no default value found, setting knockKnock = true")
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: Constants.DefaultsKnockKnockEnabledString())
+            
+        }
+        
+        let knockKnockEnabled = NSUserDefaults.standardUserDefaults().boolForKey(Constants.DefaultsKnockKnockEnabledString())
+        
+        println("knockKnockEnabled = \(knockKnockEnabled)")
+        
+        // LOCATION ENABLED
+
+        if NSUserDefaults.standardUserDefaults().objectForKey(Constants.DefaultsLocationInfoEnabledString()) == nil {
+            
+            println("no default value found, setting locationInfo = true")
+            NSUserDefaults.standardUserDefaults().setBool(true, forKey: Constants.DefaultsLocationInfoEnabledString())
+            
+        }
+        
+        let locationEnabled = NSUserDefaults.standardUserDefaults().boolForKey(Constants.DefaultsLocationInfoEnabledString())
+
+        println("location enabled = \(locationEnabled)")
+        
+        // NOTIFICATIONS ENABLED
+        
         if useNotifications {
             println("==== USING notifications ====")
             registerForActionableNotifications()
@@ -106,15 +133,23 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
     // Tap detection callback
     func detectorDidDetectTap(detector: TSTapDetector!) {
         
-        if useNotifications {
-            createNotification()
-            
-        } else {
-            sendSMS()
-
-        }
+        println("detected knock knock")
         
-        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate)) //TODO: does this even work?
+        let knockKnockEnabled = NSUserDefaults.standardUserDefaults().boolForKey(Constants.DefaultsKnockKnockEnabledString())
+        
+        if knockKnockEnabled {
+            
+            if useNotifications {
+                createNotification()
+                
+            } else {
+                sendSMS()
+                
+            }
+            
+            AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate)) //TODO: does this even work?
+            
+        }
 
     }
     
@@ -187,7 +222,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         
         var kMessage : String
         if let storedMessage = NSUserDefaults.standardUserDefaults().objectForKey(Constants.DefaultsKey_TwilioMessage()) as? String {
-            kMessage = storedMessage
+            kMessage = "[**Test**] \(storedMessage)"
         } else {
             kMessage = "[**ReaXnTest** Help, I'm not sure if I feel safe right now.]"
         }

@@ -30,6 +30,12 @@ public class Constants {
     public static func DefaultsVoiceMemosString() -> String {
         return "voice_memos"
     }
+    public static func DefaultsLocationInfoEnabledString() -> String {
+        return "location_info_enabled"
+    }
+    public static func DefaultsKnockKnockEnabledString() -> String {
+        return "knock_knock_enabled"
+    }
     
     public static func TwilioSID() -> String {
         return "ACba74031ab5f7675cd18641412e5f4b54"
@@ -40,4 +46,6 @@ public class Constants {
     public static func TwilioFromNumber() -> String {
         return "+16694004715"
     }
+    
+    //
 }

@@ -12,10 +12,20 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UITextViewD
     
     var currentActionType = MainViewController.ActionType.Message
 
+    enum EditableFields {
+        case Number
+        case Message
+        case None
+    }
+    
+    var currentlyEditing : EditableFields = EditableFields.None
+    
     @IBOutlet var phoneNumberField: UITextField!
-    @IBOutlet var messageField: UITextField!
-    @IBOutlet var saveNumberButton: UIButton!
-    @IBOutlet var saveMessageButton: UIButton!
+    @IBOutlet var messageField: UITextView!
+    @IBOutlet var saveButton: UIButton!
+    @IBOutlet var deleteButton: UIButton!
+    @IBOutlet var locationInfoSwitch: UISwitch!
+    @IBOutlet var knockKnockSwitch: UISwitch!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,12 +53,17 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UITextViewD
     
     override func viewWillAppear(animated: Bool) {
         navigationController?.setNavigationBarHidden(false, animated: true) //or animated: false
-
-//        NSNotificationCenter.defaultCenter().addObserver(self, selector: "handleHelpNotification:", name: "receivedHelpNotification", object: nil)
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name: "receivedHelpNotification", object: nil)
+        
+        currentlyEditing = EditableFields.None
+        deleteButton.layer.cornerRadius = CGFloat(10)
+        
+        let prevLocationEnabled = NSUserDefaults.standardUserDefaults().boolForKey(Constants.DefaultsLocationInfoEnabledString())
+        locationInfoSwitch.setOn(prevLocationEnabled, animated: false)
+        
+        let prevKnockKnockEnabled = NSUserDefaults.standardUserDefaults().boolForKey(Constants.DefaultsKnockKnockEnabledString())
+        
+        knockKnockSwitch.setOn(prevKnockKnockEnabled, animated: false)
+        
     }
     
     func getTitleForActionType(actionType : MainViewController.ActionType) -> String {
@@ -66,24 +81,32 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UITextViewD
     
     //MARK: - UIActions
     
-    @IBAction func saveNumber(sender: UIButton) {
-        NSUserDefaults.standardUserDefaults().setObject(phoneNumberField.text, forKey: Constants.DefaultsKey_TwilioToPhoneNumber())
-        NSUserDefaults.standardUserDefaults().synchronize()
+    @IBAction func saveFields(sender: UIButton) {
         
-        let savedNumber: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey(Constants.DefaultsKey_TwilioToPhoneNumber())
-        println("savedNumber: \(savedNumber)")
-        
+        switch currentlyEditing {
+        case EditableFields.Number:
+            NSUserDefaults.standardUserDefaults().setObject(phoneNumberField.text, forKey: Constants.DefaultsKey_TwilioToPhoneNumber())
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+            let savedNumber: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey(Constants.DefaultsKey_TwilioToPhoneNumber())
+            println("savedNumber: \(savedNumber)")
+            
+        case EditableFields.Message:
+            NSUserDefaults.standardUserDefaults().setObject(messageField.text, forKey: Constants.DefaultsKey_TwilioMessage())
+            NSUserDefaults.standardUserDefaults().synchronize()
+            
+            let savedMessage: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey(Constants.DefaultsKey_TwilioMessage())
+            println("savedMessage: \(savedMessage)")
+            
+        default:
+            println("nothing currently being edited")
+            
+        }
+
         self.view.endEditing(true)
-    }
-    
-    func saveMessage() {
-        NSUserDefaults.standardUserDefaults().setObject(messageField.text, forKey: Constants.DefaultsKey_TwilioMessage())
-        NSUserDefaults.standardUserDefaults().synchronize()
         
-        let savedMessage: AnyObject? = NSUserDefaults.standardUserDefaults().objectForKey(Constants.DefaultsKey_TwilioMessage())
-        println("savedMessage: \(savedMessage)")
-        
-        self.view.endEditing(true)
+        currentlyEditing = EditableFields.None
+
     }
     
 //    func textFieldShouldReturn(textField: UITextField) -> Bool {
@@ -91,49 +114,67 @@ class SettingsViewController: UIViewController, UITextFieldDelegate, UITextViewD
 //        return true
 //    }
     
+    func textFieldDidBeginEditing(textField: UITextField) {
+        saveButton.hidden = false
+        currentlyEditing = EditableFields.Number
+        
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        saveButton.hidden = true
+        currentlyEditing = EditableFields.None
+
+    }
+    
     @IBAction func numberFieldChanged(sender: UITextField) {
         if let fieldText = sender.text {
             if count(fieldText) >= 10 {
-                saveNumberButton.enabled = true
+                saveButton.enabled = true
             } else {
-                saveNumberButton.enabled = false
+                saveButton.enabled = false
             }
         }
     }
     
-//    @IBAction func messageFieldChanged(sender: UITextField) {
-//
-//    }
+    func textViewDidBeginEditing(textView: UITextView) {
+        saveButton.hidden = false
+        currentlyEditing = EditableFields.Message
+    }
+    
+    func textViewDidEndEditing(textView: UITextView) {
+        saveButton.hidden = true
+        currentlyEditing = EditableFields.None
+    }
     
     func textViewDidChange(textView: UITextView) {
         if let fieldText = textView.text {
             if count(fieldText) > 0 {
-                saveMessageButton.enabled = true
+                saveButton.enabled = true
             } else {
-                saveMessageButton.enabled = false
+                saveButton.enabled = false
             }
         }
     }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    @IBAction func locationInfoSwitchChanged(sender: UISwitch) {
         
-        if text == "\n" {
-            textView.resignFirstResponder()
-            saveMessage()
-            return false
-        }
+        NSUserDefaults.standardUserDefaults().setBool(sender.on, forKey: Constants.DefaultsLocationInfoEnabledString())
+        NSUserDefaults.standardUserDefaults().synchronize()
         
-        return true
+        let locationInfoEnabled: AnyObject? = NSUserDefaults.standardUserDefaults().boolForKey(Constants.DefaultsLocationInfoEnabledString())
+        println("set locationInfoEnabled: \(locationInfoEnabled)")
         
     }
     
-    //MARK: - Notifications
-    
-//    func handleOpenNotification(notification : NSNotification) {
-//        println("handle help notification")
-//        println(notification)
-////        sendSMS()
-//    }
+    @IBAction func knockKnockSwitchChanged(sender: UISwitch) {
+        
+        NSUserDefaults.standardUserDefaults().setBool(sender.on, forKey: Constants.DefaultsKnockKnockEnabledString())
+        NSUserDefaults.standardUserDefaults().synchronize()
+        
+        let knockKnockEnabled: AnyObject? = NSUserDefaults.standardUserDefaults().boolForKey(Constants.DefaultsKnockKnockEnabledString())
+        println("set knockKnockEnabled: \(knockKnockEnabled)")
+        
+    }
 
 }
 
