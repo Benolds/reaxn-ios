@@ -34,6 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         } else {
             println("==== NOT using notification ====")
         }
+        
+        // setup UINavigationBar color
+        UINavigationBar.appearance().barTintColor = UIColor(red:0.15, green:0.18, blue:0.33, alpha:1.0)
+        UINavigationBar.appearance().tintColor = UIColor.whiteColor()
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName : UIColor.whiteColor()]
 
         return true
     }
