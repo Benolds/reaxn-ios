@@ -22,8 +22,8 @@
                                     <action selector="triggerAction:" destination="wol-3i-NKu" eventType="touchUpInside" id="PIb-cj-r49"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sent Successfully" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5d9-aZ-wCd">
-                                <rect key="frame" x="95" y="443" width="130" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sent Successfully" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="5d9-aZ-wCd">
+                                <rect key="frame" x="52" y="443" width="217" height="21"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" weight="light" pointSize="17"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -79,6 +79,7 @@
                         <outlet property="nextTypeButton" destination="buZ-Qe-Ynj" id="JCH-gI-ugF"/>
                         <outlet property="previousTypeButton" destination="gfg-Kp-t6Y" id="BVC-Ik-qd6"/>
                         <outlet property="sentSuccessfullyLabel" destination="5d9-aZ-wCd" id="Fqg-dF-Z8k"/>
+                        <outlet property="settingsButton" destination="jvN-AZ-EUh" id="vmv-e6-FFQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uaD-vj-xeT" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -113,7 +114,7 @@
                                     <action selector="saveMessage:" destination="vXZ-lx-hvc" eventType="touchUpInside" id="t28-9W-3MK"/>
                                 </connections>
                             </button>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" id="voP-13-16z">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="6178179292" borderStyle="roundedRect" minimumFontSize="17" id="voP-13-16z">
                                 <rect key="frame" x="32" y="118" width="257" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -130,7 +131,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" text="[**Test**]Help, I'm not sure if I feel safe right now." borderStyle="roundedRect" minimumFontSize="17" id="wE7-Qc-wlj">
-                                <rect key="frame" x="32" y="268" width="281" height="30"/>
+                                <rect key="frame" x="32" y="268" width="257" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" returnKeyType="done"/>

@@ -16,6 +16,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
     
     var phone : TCDevice?
     var connection : TCConnection?
+    
+    let useNotifications : Bool = false
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
@@ -26,8 +28,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         
         UIApplication.sharedApplication().beginBackgroundTaskWithExpirationHandler(expirationCallback)
         
-        registerForActionableNotifications()
-//        application.registerUserNotificationSettings(UIUserNotificationSettings(forTypes: .Alert | .Badge | .Sound, categories: nil))
+        if useNotifications {
+            println("==== USING notifications ====")
+            registerForActionableNotifications()
+        } else {
+            println("==== NOT using notification ====")
+        }
 
         return true
     }
@@ -63,6 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
         UIApplication.sharedApplication().registerUserNotificationSettings(settings)
     }
 
+
     func applicationWillResignActive(application: UIApplication) {
         // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
         // Use this method to pause ongoing tasks, disable timers, and throttle down OpenGL ES frame rates. Games should use this method to pause the game.
@@ -93,21 +100,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
     
     // Tap detection callback
     func detectorDidDetectTap(detector: TSTapDetector!) {
-        createNotification()
+        
+        if useNotifications {
+            createNotification()
+            
+        } else {
+            sendSMS()
+
+        }
+        
+        AudioServicesPlayAlertSound(SystemSoundID(kSystemSoundID_Vibrate)) //TODO: does this even work?
+
     }
+    
     
     func createNotification() {
-        // create a corresponding local notification
-        var notification = UILocalNotification()
-        notification.alertBody = "Notification text goes here" // text that will be displayed in the notification
-        notification.alertAction = "Action" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
-        notification.soundName = UILocalNotificationDefaultSoundName // play default sound
-        notification.userInfo = ["UUID": NSUUID().UUIDString, ] // assign a unique identifier to the notification so that we can retrieve it later
-        notification.category = "HELP_CATEGORY"
-        UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        if useNotifications {
+            // create a corresponding local notification
+            var notification = UILocalNotification()
+            notification.alertBody = "Notification text goes here" // text that will be displayed in the notification
+            notification.alertAction = "Action" // text that is displayed after "slide to..." on the lock screen - defaults to "slide to view"
+            notification.soundName = UILocalNotificationDefaultSoundName // play default sound
+            notification.userInfo = ["UUID": NSUUID().UUIDString, ] // assign a unique identifier to the notification so that we can retrieve it later
+            notification.category = "HELP_CATEGORY"
+            UIApplication.sharedApplication().presentLocalNotificationNow(notification)
+        }
     }
-    
+
     func application(application: UIApplication, handleActionWithIdentifier identifier: String?, forLocalNotification notification: UILocalNotification, completionHandler: () -> Void) {
+        
+        if useNotifications {
             
             // Handle notification action *****************************************
             if notification.category == "HELP_CATEGORY" {
@@ -131,31 +153,35 @@ class AppDelegate: UIResponder, UIApplicationDelegate, TSTapDetectorDelegate {
                 }
             }
             completionHandler()
+            
+        }
     }
+    
     
     //MARK: - Twilio
     
     func sendSMS() {
         println("Sending request.")
         
-        let phoneNumberKevin = "+6083957313"
+//        let phoneNumberKevin = "+6083957313"
         let phoneNumberBen = "+6178179292"
-        let phoneNumberSonny = "+6284449233"
-        let phoneNumberTwilio = "+16694004715"
+//        let phoneNumberSonny = "+6284449233"
         
-        var kTwilioSID: String = "ACba74031ab5f7675cd18641412e5f4b54" //"ACa13736d34d4cb736cb4fc21a0d784691"
-        var kTwilioSecret: String = "16dd90718333f34e750a6c91ce499eb8" //"e2fa5de05efca921764d19f6c6806592"
-        var kFromNumber: String = phoneNumberTwilio //phoneNumberBen
+        var kTwilioSID: String = Constants.TwilioSID()
+        var kTwilioSecret: String = Constants.TwilioSecret()
+        
+        let phoneNumberTwilio = Constants.TwilioFromNumber()
+        var kFromNumber: String = phoneNumberTwilio
         
         var kToNumber : String
-        if let storedToNumber = NSUserDefaults.standardUserDefaults().objectForKey("twilioToPhoneNumber") as? String {
+        if let storedToNumber = NSUserDefaults.standardUserDefaults().objectForKey(Constants.DefaultsKey_TwilioToPhoneNumber()) as? String {
             kToNumber = storedToNumber
         } else {
             kToNumber = phoneNumberBen
         }
         
         var kMessage : String
-        if let storedMessage = NSUserDefaults.standardUserDefaults().objectForKey("twilioMessage") as? String {
+        if let storedMessage = NSUserDefaults.standardUserDefaults().objectForKey(Constants.DefaultsKey_TwilioMessage()) as? String {
             kMessage = storedMessage
         } else {
             kMessage = "[**ReaXnTest** Help, I'm not sure if I feel safe right now.]"

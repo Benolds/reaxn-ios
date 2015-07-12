@@ -22,6 +22,7 @@ class MainViewController: UIViewController {
         case Done
     }
     
+    @IBOutlet var settingsButton: UIButton!
     @IBOutlet var actionButton: UIButton!
     @IBOutlet var previousTypeButton: UIButton!
     @IBOutlet var nextTypeButton: UIButton!
@@ -109,42 +110,85 @@ class MainViewController: UIViewController {
             
         }
         
-        updateUIForActionType(newActionType)
+        updateAppForActionType(newActionType)
+        
     }
     
-    func updateUIForActionType(actionType : ActionType) {
+    func updateAppForActionType(actionType : ActionType) {
         switch actionType {
         case ActionType.Message:
             actionTypeLabel.text = "MESSAGES"
+            sentSuccessfullyLabel.text = "Sent Successfully"
             previousTypeButton.setImage(UIImage(named: "PlusSmall"), forState: UIControlState.Normal)
             nextTypeButton.setImage(UIImage(named: "PhoneSmall"), forState: UIControlState.Normal)
             
+            NSUserDefaults.standardUserDefaults().setObject(Constants.DefaultsMessagesString(), forKey: Constants.DefaultsKey_ActionType())
+            
+            settingsButton.hidden = false
+            
         case ActionType.Call:
             actionTypeLabel.text = "PHONE"
+            sentSuccessfullyLabel.text = "Calling..."
             previousTypeButton.setImage(UIImage(named: "MessageSmall"), forState: UIControlState.Normal)
             nextTypeButton.setImage(UIImage(named: "VoiceSmall"), forState: UIControlState.Normal)
             
+            NSUserDefaults.standardUserDefaults().setObject(Constants.DefaultsPhoneString(), forKey: Constants.DefaultsKey_ActionType())
+            
+            settingsButton.hidden = false
+            
         case ActionType.VoiceMemo:
             actionTypeLabel.text = "VOICE MEMOS"
+            sentSuccessfullyLabel.text = "00:00:24"
             previousTypeButton.setImage(UIImage(named: "PhoneSmall"), forState: UIControlState.Normal)
             nextTypeButton.setImage(UIImage(named: "PlusSmall"), forState: UIControlState.Normal)
+            
+            NSUserDefaults.standardUserDefaults().setObject(Constants.DefaultsVoiceMemosString(), forKey: Constants.DefaultsKey_ActionType())
+
+            settingsButton.hidden = false
+
             
         case ActionType.AddMore:
             actionTypeLabel.text = "ADD MORE"
             previousTypeButton.setImage(UIImage(named: "VoiceSmall"), forState: UIControlState.Normal)
             nextTypeButton.setImage(UIImage(named: "MessageSmall"), forState: UIControlState.Normal)
             
+            settingsButton.hidden = true
+            
         }
+        
+        NSUserDefaults.standardUserDefaults().synchronize()
+
     }
     
     @IBAction func triggerAction(sender: UIButton) {
         
         if self.currentActionState == ActionState.Waiting {
+            
             self.refreshViewForActionType(self.currentActionType, newActionState: ActionState.Done)
-        } else {
+            
+            if self.currentActionType == ActionType.Message {
+                if let appDelegate = UIApplication.sharedApplication().delegate as? AppDelegate {
+                    appDelegate.sendSMS()
+                }
+            }
+            
+            delay(10.0) {
+                self.refreshViewForActionType(self.currentActionType, newActionState: ActionState.Waiting)
+            }
+            
+        } /*else {
             self.refreshViewForActionType(self.currentActionType, newActionState: ActionState.Waiting)
-        }
+        }*/
         
+    }
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after(
+            dispatch_time(
+                DISPATCH_TIME_NOW,
+                Int64(delay * Double(NSEC_PER_SEC))
+            ),
+            dispatch_get_main_queue(), closure)
     }
 
     @IBAction func switchNextAction(sender: UIButton) {
