@@ -1,0 +1,6 @@
+framework module Pods_ReaXn_Tests {
+  umbrella header "Pods-ReaXn_Tests-umbrella.h"
+
+  export *
+  module * { export * }
+}

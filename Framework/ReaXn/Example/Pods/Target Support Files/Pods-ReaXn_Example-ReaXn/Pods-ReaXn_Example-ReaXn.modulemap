@@ -1,0 +1,6 @@
+framework module ReaXn {
+  umbrella header "Pods-ReaXn_Example-ReaXn-umbrella.h"
+
+  export *
+  module * { export * }
+}

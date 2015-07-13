@@ -1,0 +1,14 @@
+PODS:
+  - ReaXn (0.1.0)
+
+DEPENDENCIES:
+  - ReaXn (from `../`)
+
+EXTERNAL SOURCES:
+  ReaXn:
+    :path: ../
+
+SPEC CHECKSUMS:
+  ReaXn: 4e73849c8ab322fc54d21b030b6f695de084ae07
+
+COCOAPODS: 0.37.1
